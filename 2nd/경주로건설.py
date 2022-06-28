@@ -4,7 +4,7 @@ def solution(board):
     q = [[0,0,-1,0]]
     size = len(board)
     costBoard = [[-1 for _ in range(size)] for _ in range(size)]
-    # costBoard[비용,[지금까지 왔던 방향,지금까지 갔던 방향]]
+    # costBoard[][]=비용
     costBoard[0][0] = 0
     # 루트가 남아 있는 동안 반복한다
     while q:
