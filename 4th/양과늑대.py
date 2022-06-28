@@ -1,17 +1,21 @@
+# 루트가 제한적이므로 완전탐색이 가능할 것 같다.
 # 갈 수 있는 노드를 넓힌다.
+# 인자로 1. 현재 노드, 2. 양수, 3. 늑대수, 4. 가능한 다음노드, 5. 트리, 그리고 6. 늑대와 양의 분포를 받는다.
 def subsolution(cur_node, lambs, wolves, nxt_nodes, tree, info):
-    # 양숫자
+    # 양 숫자 +1
     if info[cur_node] == 0:
         lambs += 1
+    # 늑대 숫자 +1
     else:
         wolves += 1
+    # 지금 까지 모은 양의 숫자가 최대치라고 가정
     ans = lambs
     # 만약 이번 노드에서 늑대 숫자가 양수와 같아지면 여태까지 모은 양 수를 반환한다.
     if wolves == lambs:
         return lambs
     # 갈수 있는 노드 중 하나를 선택한다.
     for node in nxt_nodes:
-        #선택한 노드는 리스트에서 삭제하고, 그 노드에서 갈 수 있는 노드들을 추가한다.
+        #선택한 노드는 리스트에서 삭제하고, 그 노드에서 갈 수 있는 노드들을 다음에 갈수있는 노드에 추가한다.
         new_nxt_nodes = nxt_nodes.copy()
         new_nxt_nodes.remove(node)
         for i in range(2):
@@ -27,9 +31,10 @@ def subsolution(cur_node, lambs, wolves, nxt_nodes, tree, info):
 def solution(info, edges):
     answer = 0
     tree= [[] for _ in range(len(info))]
+    # 자기 자신의 인덱스가 번호로 하고 값들을 다음 노드로 하는 트리 생성
     for edge in edges:
         tree[edge[0]].append(edge[1])
-    
+    # 초깃값 넣기
     answer = subsolution(0, 0, 0, tree[0], tree, info)
     return answer
 
