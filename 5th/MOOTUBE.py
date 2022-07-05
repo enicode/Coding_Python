@@ -1,11 +1,11 @@
+# BFS
 # 그 동영상과 USADO가 k 이상이 모든 동영상의 숫자
 # 동영상 노드를 넘어가다가 USADO가 k 미만이 될때까지 찾는다.
 # 그때까지 동영상 숫자를 반환한다.
-# 2차원 배열을 만든다. (행,열) 의 값이 행에서 열로 사이 USADO라 하자. 이 행렬은 대칭 행렬
+# 딕셔너리를 만든다. 딕셔너리에는 동영상 q에 대한 모든 연결된 다른 동영상들의 정보와 유사도를 쌍을 지어 담는다.
+# 이제 딕셔너리를 방문하는데, BFS 로 탐색한다.
 import sys
 from collections import deque
-
-sys.stdin = open("5th\\input", "r")
 
 def solution(dic, k, v):
     visited = [0 for i in range(N)]
@@ -15,7 +15,9 @@ def solution(dic, k, v):
         n = queue.popleft()
         visited[n] = 1
         try:
+            #동영상 n과 관계있는 모든 동영상들에 대하여
             for val in dic[n]:
+                # USADO가 k 이상이고 방문한적이 없는 동영상 노드라면, 큐에 추가하고 추천될 동영상 갯수에 1을 더한다.
                 if val[1] >= k and not visited[val[0]]:
                     answer +=1
                     queue.append(val[0])
@@ -26,8 +28,9 @@ def solution(dic, k, v):
 
 N,Q = map(int, sys.stdin.readline().split())
 
+# USADO를 담을 딕셔너리를 만든다.
 usa_dict = {}
-
+# p번째 동영상과 q번째 동영상 사이의 유사도 r을 담는다.
 for _ in range(N-1):
     p,q,r = map(int, sys.stdin.readline().split())
     try:   
