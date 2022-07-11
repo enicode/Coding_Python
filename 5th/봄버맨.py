@@ -1,5 +1,4 @@
-# 폭탄 마다 카운트들 달아서 터질지 안터질지 체크
-
+# 폭탄마다 카운트를 달아서 터질지 안터질지 체크
 import sys
 
 r, c, n = map(int, sys.stdin.readline().split())
